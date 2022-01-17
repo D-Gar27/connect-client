@@ -1,0 +1,145 @@
+@import '../mixins';
+@import '../variables';
+
+.settingPage {
+  @include avoid;
+  width: 100vw;
+  height: 100vh;
+  @include flex(center, center);
+  padding: 1rem;
+  .container {
+    width: 100%;
+    height: max-content;
+    padding-inline: 1rem;
+    padding-block: 3rem;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    @include flex(center, center, $col: true);
+    gap: 2rem;
+    max-width: 25rem;
+    background-color: $lightDark;
+    .imgContainer {
+      position: relative;
+      width: 7rem;
+      height: 7rem;
+      border-radius: 100vw !important;
+      cursor: pointer;
+      .img {
+        border-radius: 100vw !important;
+      }
+      input[type='file'] {
+        display: none;
+      }
+      .editIcon {
+        z-index: 5;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: $primary;
+        font-size: 1.2;
+      }
+    }
+    .inputsContainer {
+      width: max-content;
+      @include flex(center, center, $col: true);
+      gap: 1rem;
+      input {
+        width: 100%;
+        max-width: 15rem;
+        outline: none;
+        padding-left: 0.25em;
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: 1.05rem;
+        border-bottom: solid 2px $primary;
+        &::placeholder {
+          color: $gray;
+        }
+      }
+      .changePW {
+        width: 100%;
+        color: $primary;
+        cursor: pointer;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+      button {
+        padding-inline: 1.75em;
+        background-color: transparent;
+        color: $primary;
+        cursor: pointer;
+        @include flex(center, center);
+        gap: 0.5rem;
+        border: solid 1.5px currentColor;
+        border-radius: 0.5rem;
+        padding-block: 0.3em;
+        font-weight: bold;
+        &:hover {
+          background-color: rgba($color: $primary, $alpha: 0.1);
+        }
+      }
+      .delete {
+        width: max-content;
+        margin-left: auto;
+        color: $red;
+        cursor: pointer;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.modal {
+  position: fixed;
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem 1rem;
+  left: 0;
+  top: 0;
+  background-color: rgba($color: $dark, $alpha: 0.75);
+  @include flex(center, center);
+  .container {
+    @include flex(center, center, $col: true);
+    gap: 2rem;
+    width: 100%;
+    max-width: 20rem;
+    height: max-content;
+    padding: 2rem 1rem;
+    background-color: white;
+    border-radius: $radius;
+    color: $dark;
+    input {
+      width: 100%;
+      height: 2rem;
+      padding-left: 0.25rem;
+    }
+    .buttons {
+      width: 100%;
+      @include flex(space-between, center);
+      button {
+        padding-inline: 1.75em;
+        background-color: transparent;
+        color: $primary;
+        cursor: pointer;
+        @include flex(center, center);
+        gap: 0.5rem;
+        border: solid 1.5px currentColor;
+        border-radius: 0.5rem;
+        padding-block: 0.3em;
+        font-weight: bold;
+        &:hover {
+          background-color: rgba($color: $primary, $alpha: 0.1);
+        }
+        &:last-child {
+          color: springgreen;
+        }
+      }
+      .delete {
+        color: $red !important;
+      }
+    }
+  }
+}

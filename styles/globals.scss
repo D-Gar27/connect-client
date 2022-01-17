@@ -1,0 +1,29 @@
+@import './variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+:root {
+  font-size: 16px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: 0.05rem;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: $dark;
+  color: $white;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1460px;
+  margin-inline: auto;
+}

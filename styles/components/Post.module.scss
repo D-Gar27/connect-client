@@ -1,0 +1,125 @@
+@import '../mixins';
+@import '../variables';
+
+.post {
+  width: 100%;
+  height: max-content;
+  background-color: $lightDark;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: 1.5rem;
+  color: $white;
+  position: relative;
+  .user {
+    @include flex(space-between, center);
+    gap: 1rem;
+    .userImg {
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 100vw;
+      cursor: pointer;
+      .userImage {
+        border-radius: 100vw !important;
+      }
+    }
+    .userInfo {
+      flex: 1;
+      h5 {
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      p {
+        font-size: 0.75rem;
+        color: $gray;
+      }
+    }
+  }
+  .caption {
+    margin-block: 1.5rem;
+    font-weight: $semibold;
+    font-size: 1.05rem;
+  }
+  .captionEdit {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: $semibold;
+    font-size: 1.05rem;
+    border: none;
+    width: 100%;
+    padding-bottom: 0.3rem;
+    border-bottom: solid 2px rgba($color: $primary, $alpha: 0.5);
+    background-color: transparent;
+    outline: none;
+    color: $white;
+  }
+  .postImg {
+    position: relative;
+    width: 100%;
+    min-height: 20rem;
+    border-radius: $radius;
+    .img {
+      border-radius: $radius;
+    }
+  }
+  .interact {
+    margin-top: 1rem;
+    color: $primary;
+    @include flex(space-between, center);
+    font-size: 1.25rem;
+    padding-inline: 1rem;
+    cursor: pointer;
+    div {
+      @include flex(center, center);
+      gap: 0.5rem;
+      p {
+        font-size: 0.85rem;
+        color: $white;
+      }
+    }
+  }
+}
+
+.options {
+  position: absolute;
+  z-index: 10;
+  right: 1rem;
+  top: 4rem;
+  list-style: none;
+  background-color: $grayDark;
+  padding-block: 0.75rem;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+  width: 10rem;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  @include flex(flex-start, flex-start, $col: true);
+  gap: 0.5rem;
+  li {
+    padding-left: 0.5rem;
+    padding-block: 0.3rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba($color: $gray, $alpha: 0.3);
+    }
+  }
+  .delete {
+    color: $red;
+    &:hover {
+      background-color: rgba($color: $red, $alpha: 0.2);
+    }
+  }
+}
+
+@media (max-width: $wide) {
+  .post {
+    .postImg {
+      min-height: 10rem;
+    }
+    .interact {
+      padding-inline: 0rem;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import '../variables';
+@import '../mixins';
+
+@media (max-width: $tablet) {
+  .leftSidebar {
+    display: none;
+  }
+}

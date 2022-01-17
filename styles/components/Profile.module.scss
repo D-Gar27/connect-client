@@ -1,0 +1,185 @@
+@import '../variables';
+@import '../mixins';
+
+.profilePage {
+  @include avoid;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  .userProfile {
+    padding: 2rem;
+    grid-column: 2 / 12;
+    width: 100%;
+    min-height: 100%;
+    @include flex(flex-start, center, $col: true);
+
+    .profileImg {
+      position: relative;
+      width: 7rem;
+      height: 7rem;
+      cursor: pointer;
+      .userImg {
+        border-radius: 100vw !important;
+      }
+      input {
+        display: none;
+      }
+      .imageEdit {
+        cursor: pointer;
+        position: absolute;
+        z-index: 5;
+        bottom: 0;
+        right: 0;
+        color: $primary;
+        font-size: 1.1rem;
+      }
+    }
+    .userName {
+      width: 100%;
+      margin-top: 0.75rem;
+      @include flex(center, center, $col: true);
+      gap: 0.35rem;
+      p {
+        color: $gray;
+        font-size: 0.9rem;
+      }
+    }
+    .follow {
+      margin-top: 1rem;
+      button {
+        background-color: rgba($color: $primary, $alpha: 0.2);
+        border: none;
+        padding: 0.35em 1.5em;
+        font-weight: bold;
+        color: $primary;
+        border-radius: 0.25em;
+        border: solid 2px currentColor;
+        cursor: pointer;
+      }
+      .cancel {
+        background-color: rgba($color: $red, $alpha: 0.1);
+        color: $red;
+      }
+    }
+    .feedAndFris {
+      margin-top: 1rem;
+      width: 100%;
+      min-height: 10rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      .connectionsContainer {
+        flex: 2;
+        width: 100%;
+        .connections {
+          width: 100%;
+          margin-top: 1rem;
+          padding: 1rem;
+          background-color: $lightDark;
+          border-radius: $radius;
+          box-shadow: $shadow;
+          height: max-content;
+          .friends {
+            margin-top: 1rem;
+            @include flex(flex-start, flex-start);
+            flex-wrap: wrap;
+            gap: 1rem;
+            div {
+              position: relative;
+              cursor: pointer;
+              width: 3rem;
+              height: 3rem;
+              background-color: $dark;
+              border-radius: 100vw;
+              .folImg {
+                border-radius: 100vw !important;
+              }
+            }
+          }
+        }
+        .edit {
+          width: 100%;
+          background-color: transparent;
+          color: $primary;
+          cursor: pointer;
+          @include flex(center, center);
+          gap: 0.5rem;
+          margin-block: 1rem;
+          border: solid 1.5px currentColor;
+          border-radius: $radius;
+          padding-block: 0.5rem;
+          &:hover {
+            background-color: rgba($color: $primary, $alpha: 0.1);
+          }
+          .editIcon {
+            font-size: 1.1rem;
+            color: $primary;
+          }
+        }
+        .logout {
+          width: 100%;
+          background-color: transparent;
+          @include flex(center, center);
+          gap: 0.5rem;
+          cursor: pointer;
+          padding-block: 0.5rem;
+          text-align: center;
+          color: $red;
+          border: solid 1.5px currentColor;
+          border-radius: $radius;
+          &:hover {
+            background-color: rgba($color: $red, $alpha: 0.1);
+          }
+        }
+      }
+      .userPosts {
+        flex: 4;
+        width: 100%;
+        padding: 1rem;
+        @include flex(flex-start, center, $col: true);
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+.errText {
+  @include avoid;
+  width: 100vw;
+  height: 100vh;
+  @include flex(center, center, $col: true);
+  gap: 2rem;
+  h1 {
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: $tablet) {
+  .profilePage {
+    grid-template-columns: repeat(10, 1fr);
+    .userProfile {
+      padding: 1rem;
+      grid-column: 1 / 11;
+      .feedAndFris {
+        flex-direction: column-reverse;
+        align-items: center;
+        .connectionsContainer {
+          flex: 1;
+
+          .connections {
+            .friends {
+              div {
+                width: 2.5rem;
+                height: 2.5rem;
+              }
+            }
+          }
+        }
+        .userPosts {
+          flex: 1;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

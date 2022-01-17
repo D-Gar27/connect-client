@@ -1,0 +1,19 @@
+@mixin flex($jus, $ali, $col: false) {
+  display: flex;
+  @if $col {
+    flex-direction: column;
+    justify-content: $jus;
+    align-items: $ali;
+  } @else {
+    flex-direction: row;
+    justify-content: $jus;
+    align-items: $ali;
+  }
+}
+@mixin avoid {
+  padding-top: 4rem;
+
+  @media (max-width: $tablet) {
+    padding-top: 8rem;
+  }
+}

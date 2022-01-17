@@ -1,0 +1,11 @@
+@import './variables';
+@import './mixins';
+
+.landing {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $dark;
+  @include avoid;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
