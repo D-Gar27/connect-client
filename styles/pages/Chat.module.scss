@@ -1,0 +1,223 @@
+@import '../mixins';
+@import '../variables';
+
+.chatRoom {
+  @include avoid;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  .users {
+    grid-column: 1 / 4;
+    position: relative;
+    width: 100%;
+    .usersContainer {
+      @include flex(flex-start, center, $col: true);
+      padding: 1rem;
+      gap: 1rem;
+      position: sticky;
+      height: max-content;
+      width: 100%;
+      .userDiv {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        @include flex(space-between, center);
+        cursor: pointer;
+        transition: $speed;
+        border-radius: 0.5rem;
+        &:hover {
+          background-color: $lightDark;
+        }
+        .user {
+          gap: 0.5rem;
+          @include flex(flex-start, center);
+          .userImg {
+            position: relative;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 100vw;
+            .img {
+              border-radius: 100vw !important;
+            }
+            .indicator {
+              position: absolute;
+              width: 0.6rem;
+              height: 0.6rem;
+              padding: 1px;
+              bottom: 0;
+              right: 0;
+              border-radius: 100vw;
+            }
+          }
+        }
+        .trashIcon {
+          color: $red;
+        }
+      }
+    }
+  }
+  .chatArea {
+    grid-column: 4 / -1;
+    background-color: $lightDark;
+    @include flex(center, center, $col: true);
+    height: calc(100vh - 4rem);
+    width: 100%;
+    padding: 1rem;
+    .chatContainer {
+      width: 100%;
+      height: 100%;
+      @include flex(space-between, center, $col: true);
+      .messages {
+        overflow-y: scroll;
+        height: calc(100vh - 7rem);
+        width: 100%;
+        gap: 0.5rem;
+        @include flex(flex-start, flex-start, $col: true);
+        padding-bottom: 1rem;
+        .chatTitle {
+          text-align: center;
+          width: max-content;
+          margin-inline: auto;
+        }
+        .messageContainer {
+          width: max-content;
+          min-height: 5rem;
+          @include flex(center, center);
+          gap: 0.75rem;
+          .userImg {
+            position: relative;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 100vw;
+            .img {
+              border-radius: 100vw !important;
+            }
+          }
+          .textContainer {
+            .text {
+              border-radius: 0.5rem;
+              padding: 0.75rem;
+              background-color: $darkdark;
+            }
+            .time {
+              margin-top: 0.25rem;
+              font-size: 0.75rem;
+              color: $gray;
+            }
+          }
+        }
+        .messageContainerSender {
+          margin-left: auto;
+          margin-right: 0.5rem;
+          .userImg {
+            display: none;
+          }
+          .textContainer {
+            @include flex(center, flex-end, $col: true);
+            .text {
+              background-color: $grayDark;
+            }
+          }
+        }
+      }
+      .sendMsg {
+        background-color: $dark;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        @include flex(space-between, center);
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        .backBtn {
+          width: 2rem;
+          height: 2rem;
+          background-color: $lightDark;
+          border-radius: 100vw;
+          border: none;
+          @include flex(center, center);
+          .backIcon {
+            color: $primary;
+          }
+        }
+        div {
+          @include flex(center, center);
+          width: 100%;
+          input {
+            width: 100%;
+            max-width: 20rem;
+            min-height: 2.25rem;
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+            border: solid 1px $primary;
+            border-right: none;
+            background-color: transparent;
+            outline: none;
+            color: white;
+            padding-left: 0.5rem;
+          }
+          button {
+            background-color: transparent;
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            border: solid 1px $primary;
+            width: 7rem;
+            height: 2.25rem;
+            color: $primary;
+            cursor: pointer;
+            transition: $speed;
+            &:hover {
+              background-color: rgba($color: $primary, $alpha: 0.2);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.isDeleted {
+  animation: deleted 500ms ease-out forwards;
+}
+
+@keyframes deleted {
+  from {
+    display: flex;
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-150%);
+    display: none;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .chatRoom {
+    .users {
+      gap: 1.5rem;
+      grid-column: 1 / -1;
+      .userDiv {
+        background-color: $lightDark;
+      }
+    }
+    .chatArea {
+      width: 100vw;
+      height: calc(100vh - 8rem);
+      position: absolute;
+    }
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .chatRoom {
+    .chatArea {
+      display: flex !important;
+      .chatContainer {
+        .sendMsg {
+          .backBtn {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

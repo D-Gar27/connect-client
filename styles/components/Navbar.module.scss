@@ -26,16 +26,24 @@
         width: 20rem;
         height: 2rem;
         margin-inline: auto;
-        border-radius: 50vw;
         background-color: rgb(255, 255, 255);
         border: none;
-        padding-left: 2rem;
+        padding-left: 0.5rem;
+        outline: none;
+        border-radius: 0.5rem;
+        border-bottom-left-radius: 0rem;
+        border-bottom-right-radius: 0rem;
+        &:focus {
+          border-top-left-radius: 0.5rem;
+          border-top-right-radius: 0.5rem;
+        }
       }
       .searchIcon {
         position: absolute;
-        left: 0.5em;
+        right: 0.5em;
         top: 50%;
         transform: translateY(-50%);
+        cursor: pointer;
       }
     }
     .searchMobile {

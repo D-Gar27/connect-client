@@ -45,6 +45,8 @@
     }
     .follow {
       margin-top: 1rem;
+      @include flex(center, center);
+      gap: 2rem;
       button {
         background-color: rgba($color: $primary, $alpha: 0.2);
         border: none;
@@ -54,6 +56,13 @@
         border-radius: 0.25em;
         border: solid 2px currentColor;
         cursor: pointer;
+        transition: $speed;
+        &:hover {
+          background-color: rgba($color: $primary, $alpha: 0.25);
+        }
+      }
+      .messageBtn {
+        color: springgreen;
       }
       .cancel {
         background-color: rgba($color: $red, $alpha: 0.1);

@@ -1,7 +1,17 @@
 @import '../variables';
 @import '../mixins';
 
-@media (max-width: $tablet) {
+.leftSidebar {
+  grid-column: 1 / 4;
+  width: 100%;
+  margin-top: 2rem;
+  padding-left: 1rem;
+  .suggestion {
+    position: sticky;
+  }
+}
+
+@media (max-width: $laptop) {
   .leftSidebar {
     display: none;
   }

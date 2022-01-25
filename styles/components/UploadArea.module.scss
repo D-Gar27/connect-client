@@ -6,13 +6,15 @@
   top: 6rem;
   width: 100%;
   min-height: 8rem;
+  max-height: 20rem;
   background-color: $lightDark;
   border-radius: $radius;
   padding: 1.5rem;
   @include flex(flex-start, flex-start, $col: true);
   gap: 1.5rem;
+  max-width: 30rem;
 
-  box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: $shadow;
   .user {
     @include flex(center, center);
     gap: 1rem;

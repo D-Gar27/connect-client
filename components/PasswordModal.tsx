@@ -1,5 +1,5 @@
-import styles from '../styles/components/Setting.module.scss';
-import { signOut, useSession } from 'next-auth/react';
+import styles from '../styles/pages/Setting.module.scss';
+import { signOut } from 'next-auth/react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';

@@ -2,7 +2,7 @@
 @import '../variables';
 
 .feedSection {
-  grid-column: 3 / 9;
+  grid-column: 4 / 9;
   width: 100%;
   @include flex(flex-start, center, $col: true);
   padding: 2rem;
@@ -12,6 +12,7 @@
     height: 100%;
     @include flex(flex-start, center, $col: true);
     gap: 1.5rem;
+    position: relative;
     .uploadAreaDiv {
       width: 100%;
       min-height: 8rem;
@@ -39,6 +40,11 @@
   }
 }
 
+@media (max-width: $laptop) {
+  .feedSection {
+    grid-column: 1 / 9;
+  }
+}
 @media (max-width: $tablet) {
   .feedSection {
     grid-column: 1 / 13;
@@ -55,6 +61,23 @@
   .feedSection {
     .feedContainer {
       .uploadAreaDiv {
+        position: fixed;
+        right: 1rem;
+        top: 2rem;
+        @include avoid;
+        z-index: 20;
+        width: 32vw;
+      }
+      .connect {
+        text-align: center;
+      }
+    }
+  }
+}
+@media (min-width: $laptop) {
+  .feedSection {
+    .feedContainer {
+      .suggestion {
         display: none;
       }
     }

@@ -1,10 +1,12 @@
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { restoreUserData } from '../redux/userSlice';
 import Navbar from './Navbar';
 import axios from 'axios';
+import { io } from 'socket.io-client';
+import { addOnlineUsers } from '../redux/chatSlice';
 
 interface Children {
   children: JSX.Element;
@@ -40,6 +42,11 @@ const Layout = ({ children }: Children) => {
       } else {
         const user: any = session?.user;
         getUser({ username: user?.username, token: user?.token });
+        const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
+        socket.emit('add_user', user?.username);
+        socket.on('get_online_users', (users) =>
+          dispatch(addOnlineUsers(users))
+        );
       }
     });
   }, [router, dispatch]);

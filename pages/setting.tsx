@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import styles from '../styles/components/Setting.module.scss';
+import styles from '../styles/pages/Setting.module.scss';
 import { FaPen } from 'react-icons/fa';
 import { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -106,7 +106,7 @@ const EditProfile = () => {
         <form className={styles.container}>
           <label className={styles.imgContainer}>
             <Image
-              src={image || '/images/account.png'}
+              src={image || '/images/account.svg'}
               layout="fill"
               objectFit="cover"
               alt=""

@@ -9,16 +9,17 @@ import Moment from 'react-moment';
 import axios from 'axios';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import Comment from './Comment';
 
 interface Props {
   _id?: string;
   username?: string;
   caption?: string;
 
-  postImgs: [string];
+  postImgs?: [string];
   likes?: [string];
   comments?: [];
-  createdAt: string;
+  createdAt?: string;
 }
 
 const Post = ({
@@ -28,7 +29,6 @@ const Post = ({
   username,
   caption,
   likes,
-  comments,
 }: Props) => {
   const [post, setPost] = useState({
     _id,
@@ -38,7 +38,6 @@ const Post = ({
     userImg: '',
     caption,
     likes,
-    comments,
   });
 
   const [showOptions, setShowOption] = useState<boolean>(false);
@@ -47,6 +46,8 @@ const Post = ({
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editValue, setEditValue] = useState(post.caption);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
+  const [comments, setComments] = useState<any>();
+  const [isCmtOpen, setIsCmtOpen] = useState<boolean>(false);
 
   const UserData = useSelector((state: any) => state?.user?.user);
 
@@ -91,6 +92,20 @@ const Post = ({
       setHasLiked(false);
     }
   }, [likes, UserData]);
+
+  useEffect(() => {
+    const getComments = async () => {
+      const token = UserData?.token;
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/posts/${post._id}/comments`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      setComments(data);
+    };
+    getComments();
+  }, [UserData, post]);
 
   const handleDelete = async () => {
     try {
@@ -146,7 +161,7 @@ const Post = ({
               }
               passHref
             >
-              <div className={styles.userImg}>
+              <figure className={styles.userImg}>
                 <Image
                   src={post.userImg || '/images/account.png'}
                   alt="user"
@@ -154,7 +169,7 @@ const Post = ({
                   objectFit="cover"
                   className={styles.userImage}
                 />
-              </div>
+              </figure>
             </Link>
 
             <div className={styles.userInfo}>
@@ -189,21 +204,24 @@ const Post = ({
           ) : (
             <p className={styles.caption}>{post.caption}</p>
           )}
-          {/* {postImgs?.length > 0 && <div>
-        postImgs.map((img, i) => {
-          return (
-            <div className={styles.postImg} key={i}>
-              <Image
-                src={img}
-                alt={''}
-                layout="fill"
-                objectFit="contain"
-                className="img"
-              />
-            </div>
-          );
-        })
-        </div>} */}
+          {postImgs?.length ? (
+            <>
+              {postImgs.map((post) => {
+                return (
+                  <figure key={post} className={styles.postImg}>
+                    <Image
+                      src={post}
+                      layout="fill"
+                      objectFit="contain"
+                      alt=""
+                    />
+                  </figure>
+                );
+              })}
+            </>
+          ) : (
+            ''
+          )}
           <div className={styles.interact}>
             <div>
               {hasLiked ? (
@@ -213,11 +231,12 @@ const Post = ({
               )}
               <p>{likesCount}</p>
             </div>
-            <div>
+            <div onClick={() => setIsCmtOpen(!isCmtOpen)}>
               <FaCommentDots />
-              <p>{post.comments?.length}</p>
+              <p>{comments?.length}</p>
             </div>
           </div>
+          {isCmtOpen && <Comment comments={comments} postID={post._id} />}
         </div>
       )}
     </>

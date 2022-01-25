@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import styles from '../styles/components/Login.module.scss';
+import styles from '../styles/pages/Login.module.scss';
 import { getProviders, signIn } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';

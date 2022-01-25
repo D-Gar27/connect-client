@@ -13,7 +13,9 @@ export const UserSlice = createSlice({
     restoreUserData: (state, action) => {
       state.user.username = action.payload?.username;
       state.user.token = action.payload?.token;
-      state.user.userImg = action.payload?.userImg;
+      state.user.userImg = action.payload?.userImg
+        ? action.payload?.userImg
+        : '/images/account.svg';
     },
   },
 });

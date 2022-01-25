@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Post from '../../components/Post';
-import styles from '../../styles/components/Profile.module.scss';
+import styles from '../../styles/pages/Profile.module.scss';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { RiUserSettingsFill } from 'react-icons/ri';
 import Head from 'next/head';
@@ -166,7 +166,7 @@ const Profile = () => {
             <section className={styles.userProfile}>
               <div className={styles.profileImg}>
                 <Image
-                  src={userData?.profilePic || '/images/account.png'}
+                  src={userData?.profilePic || '/images/account.svg'}
                   alt=""
                   layout="fill"
                   objectFit="cover"
@@ -198,6 +198,8 @@ const Profile = () => {
                         />
                       );
                     })
+                  ) : loading ? (
+                    <h1>Loading...</h1>
                   ) : (
                     <h1>No posts to show yet</h1>
                   )}
@@ -209,13 +211,17 @@ const Profile = () => {
                       {following &&
                         following?.map((fol) => (
                           <Link
-                            href={`/profile/${fol.name}`}
+                            href={
+                              UserData.username === fol?.name
+                                ? '/profile'
+                                : `/profile/${fol.name}`
+                            }
                             key={fol.name}
                             passHref
                           >
                             <div className="">
                               <Image
-                                src={fol.pic}
+                                src={fol.pic || '/images/account.svg'}
                                 alt={fol.name}
                                 layout="fill"
                                 objectFit="cover"
@@ -232,13 +238,17 @@ const Profile = () => {
                       {followers &&
                         followers?.map((fol) => (
                           <Link
-                            href={`/profile/${fol.name}`}
+                            href={
+                              UserData.username === fol?.name
+                                ? '/profile'
+                                : `/profile/${fol.name}`
+                            }
                             key={fol.name}
                             passHref
                           >
                             <div className="">
                               <Image
-                                src={fol.pic}
+                                src={fol.pic || '/images/account.svg'}
                                 alt={fol.name}
                                 layout="fill"
                                 objectFit="cover"

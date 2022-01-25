@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Post from '../../components/Post';
-import styles from '../../styles/components/Profile.module.scss';
+import { currentChat } from '../../redux/chatSlice';
+import styles from '../../styles/pages/Profile.module.scss';
 
 interface Userdata {
   bio: string;
@@ -45,6 +45,7 @@ const Profile = () => {
   const [following, setFollowing] = useState<{ pic: string; name: string }[]>();
 
   const router = useRouter();
+  const dispatch = useDispatch();
   const username = router.query.username;
 
   const UserData = useSelector((state: any) => state?.user?.user);
@@ -104,7 +105,6 @@ const Profile = () => {
             },
           }
         );
-        router.reload();
       }
       if (action === 'unfollow') {
         await axios.put(
@@ -172,6 +172,19 @@ const Profile = () => {
     fetchFollowers();
   }, [userData, UserData]);
 
+  const sendMessgeHandler = async () => {
+    try {
+      const sender = UserData?.username;
+      const receiver = userData?.username;
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
+        sender,
+        receiver,
+      });
+      dispatch(currentChat(res.data));
+      router.push('/chat');
+    } catch (error) {}
+  };
+
   if (loading) {
     return (
       <>
@@ -184,6 +197,7 @@ const Profile = () => {
       </>
     );
   }
+
   return (
     <>
       {status.success ? (
@@ -207,6 +221,12 @@ const Profile = () => {
                 <p>{userData?.bio}</p>
               </div>
               <div className={styles.follow}>
+                <button
+                  className={styles.messageBtn}
+                  onClick={sendMessgeHandler}
+                >
+                  Message
+                </button>
                 {userData?.followers?.includes(UserData?.username) ? (
                   <button onClick={() => followHandler('unfollow')}>
                     Followed
@@ -224,6 +244,7 @@ const Profile = () => {
                       return (
                         <Post
                           key={post._id}
+                          _id={post._id}
                           username={post.username}
                           caption={post.caption}
                           likes={post.likes}
@@ -253,7 +274,7 @@ const Profile = () => {
                         >
                           <div className="">
                             <Image
-                              src={fol.pic}
+                              src={fol.pic || '/images/account.svg'}
                               alt={fol.name}
                               layout="fill"
                               objectFit="cover"
@@ -279,7 +300,7 @@ const Profile = () => {
                         >
                           <div className="">
                             <Image
-                              src={fol.pic}
+                              src={fol.pic || '/images/account.svg'}
                               alt={fol.name}
                               layout="fill"
                               objectFit="cover"

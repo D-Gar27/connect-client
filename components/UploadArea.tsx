@@ -37,6 +37,8 @@ const UploadArea = () => {
           { headers: { authorization: `Bearer ${UserData?.token}` } }
         );
       });
+      setImage('');
+      setCaption('');
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +49,7 @@ const UploadArea = () => {
       <div className={styles.user}>
         <div className={styles.userImg}>
           <Image
-            src={UserData.userImg || '/images/account.png'}
+            src={UserData.userImg || '/images/account.svg'}
             alt="user"
             layout="fill"
             objectFit="cover"

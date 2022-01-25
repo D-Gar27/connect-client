@@ -1,0 +1,54 @@
+@import '../mixins';
+@import '../variables';
+
+.suggestion {
+  width: 100%;
+  height: max-content;
+  @include flex(center, center, $col: true);
+  gap: 1.5rem;
+  max-width: 30rem;
+  margin-left: auto;
+  h1 {
+    font-size: 1.25rem;
+  }
+  .user {
+    width: 100%;
+    background-color: $lightDark;
+    padding: 1rem;
+    border-radius: 0.5em;
+    max-width: 25rem;
+    box-shadow: $shadow;
+    @include flex(space-between, center);
+    .userImg {
+      position: relative;
+      cursor: pointer;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 100vw;
+      .img {
+        border-radius: 100vw !important;
+      }
+    }
+    a {
+      flex: 1;
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-weight: $semibold;
+    }
+    button {
+      background-color: rgba($color: $primary, $alpha: 0.15);
+      border: none;
+      padding: 0.35em 1.5em;
+      font-weight: bold;
+      color: $primary;
+      border-radius: 0.25em;
+      border: solid 2px currentColor;
+      cursor: pointer;
+      transition: $speed;
+      &:hover {
+        background-color: rgba($color: $primary, $alpha: 0.25);
+      }
+    }
+  }
+}

@@ -1,0 +1,128 @@
+@import '../mixins';
+@import '../variables';
+
+.comment {
+  padding-top: 1rem;
+  form.input {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    @include flex(center, center);
+    input[type='text'] {
+      width: 100%;
+      background-color: transparent;
+      border: solid 1px rgba($color: $primary, $alpha: 0.5);
+      outline: none;
+      caret-color: $primary;
+      height: 2rem;
+      color: white;
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      padding-left: 0.5rem;
+    }
+    button {
+      height: 2rem;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      width: 5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: $semibold;
+      background-color: transparent;
+      border: 1px solid rgba($color: $primary, $alpha: 0.5);
+      color: rgba($color: $primary, $alpha: 0.5);
+      transition: $speed;
+      &:hover {
+        background-color: rgba($color: $primary, $alpha: 0.1);
+      }
+    }
+  }
+}
+
+.commentDiv {
+  margin-block: 0.75rem;
+  width: 100%;
+  @include flex(center, space-between, $col: true);
+  background-color: $darkdark;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+  .top {
+    @include flex(space-between, center);
+    .userInfo {
+      @include flex(flex-start, center);
+      gap: 0.5rem;
+      cursor: pointer;
+      width: 100%;
+      .userImg {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+        .userImage {
+          border-radius: 100vw !important;
+        }
+      }
+      p {
+        font-size: $semibold;
+        font-size: 0.9rem;
+      }
+    }
+  }
+  .bottom {
+    @include flex(flex-start, center);
+    gap: 1rem;
+    .commentText {
+      font-size: $semibold;
+    }
+    .moment {
+      color: $gray;
+      font-size: 0.75rem;
+      width: 100%;
+      max-width: max-content;
+    }
+    .commentEdit {
+      font-weight: $semibold;
+      border: none;
+      width: 100%;
+      padding-bottom: 0.3rem;
+      border-bottom: solid 2px rgba($color: $primary, $alpha: 0.5);
+      background-color: transparent;
+      outline: none;
+      color: $white;
+    }
+  }
+}
+
+.options {
+  position: absolute;
+  z-index: 30;
+  right: 1rem;
+  top: 3rem;
+  list-style: none;
+  background-color: $grayDark;
+  padding-block: 0.75rem;
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+  width: 10rem;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  @include flex(flex-start, flex-start, $col: true);
+  gap: 0.5rem;
+  li {
+    padding-left: 0.5rem;
+    padding-block: 0.3rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba($color: $gray, $alpha: 0.3);
+    }
+  }
+  .delete {
+    color: $red;
+    &:hover {
+      background-color: rgba($color: $red, $alpha: 0.2);
+    }
+  }
+}

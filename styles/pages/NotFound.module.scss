@@ -1,0 +1,19 @@
+@import '../mixins';
+@import '../variables';
+
+.notFound {
+  @include avoid;
+  width: 100vw;
+  height: 100vh;
+  @include flex(center, center, $col: true);
+  .text {
+    @include flex(center, center);
+    gap: 2rem;
+    h1 {
+      font-size: 5rem;
+      color: $primary;
+      border-right: 1px solid $primary;
+      padding-right: 2rem;
+    }
+  }
+}

@@ -1,0 +1,103 @@
+@import '../variables';
+@import '../mixins';
+
+.searchModal {
+  position: absolute;
+  padding-top: 0.5rem;
+  width: 100%;
+  min-height: 2.75rem;
+  background-color: white;
+  z-index: 100;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  color: $dark;
+  @include flex(flex-start, center, $col: true);
+  .user {
+    @include flex(space-between, center);
+    gap: 0.5rem;
+    width: 100%;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: $dark;
+    .userImg {
+      border-radius: 100vw;
+      position: relative;
+      width: 2.3rem;
+      height: 2.3rem;
+      .img {
+        border-radius: 100vw !important;
+      }
+    }
+    .username {
+      flex: 1;
+      font-weight: $semibold;
+    }
+    &:hover {
+      background-color: rgba($color: $gray, $alpha: 0.5);
+    }
+  }
+  h4 {
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+}
+
+.mobileSearchModal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background-color: $gray;
+  color: $dark;
+  .mobileInput {
+    padding: 1rem;
+    @include flex(flex-start, center);
+    gap: 1rem;
+    input {
+      width: 20rem;
+      height: 2rem;
+      margin-inline: auto;
+      background-color: rgb(255, 255, 255);
+      border: none;
+      padding-left: 0.5rem;
+      outline: none;
+      border-radius: 0.5rem;
+      border-radius: 0.5rem;
+    }
+  }
+  .user {
+    @include flex(space-between, center);
+    gap: 0.5rem;
+    width: 100%;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: $dark;
+    .userImg {
+      border-radius: 100vw;
+      position: relative;
+      width: 2.3rem;
+      height: 2.3rem;
+      .img {
+        border-radius: 100vw !important;
+      }
+    }
+    .username {
+      flex: 1;
+      font-weight: $semibold;
+    }
+    &:hover {
+      background-color: rgba($color: $gray, $alpha: 0.5);
+    }
+  }
+  h4 {
+    text-align: center;
+  }
+}
