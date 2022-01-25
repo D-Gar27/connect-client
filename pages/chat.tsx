@@ -34,8 +34,9 @@ const Chat = () => {
   }, [UserData]);
 
   useEffect(() => {
-    const lastChat: any =
-      JSON.parse(localStorage.getItem('chat') || '') || null;
+    const lastChat: any = JSON.parse(
+      JSON.stringify(localStorage.getItem('chat'))
+    );
     const lastUser = lastChat?.userToSend;
     const lastCon = conversations?.some((con) =>
       con.members.includes(lastUser)
