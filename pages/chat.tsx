@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
@@ -47,29 +48,38 @@ const Chat = () => {
   }, [conversations, dispatch]);
 
   return (
-    <main className={styles.chatRoom}>
-      {' '}
-      <aside className={styles.users}>
-        <div className={styles.usersContainer}>
-          {!conversations?.length ? (
-            <p>You haven&apos;t talk to anyone yet</p>
+    <>
+      <Head>
+        <title>Chat | Connect</title>
+      </Head>
+      <main className={styles.chatRoom}>
+        {' '}
+        <aside className={styles.users}>
+          <div className={styles.usersContainer}>
+            {!conversations?.length ? (
+              <p>You haven&apos;t talk to anyone yet</p>
+            ) : (
+              <>
+                {' '}
+                {conversations?.map((user: any) => (
+                  <ChatUser key={user?._id} user={user} />
+                ))}
+              </>
+            )}
+          </div>
+        </aside>
+        <section
+          className={styles.chatArea}
+          style={{ display: Chat?.isOpen ? 'flex' : 'none' }}
+        >
+          {Chat?.isOpen ? (
+            <MessageContainer />
           ) : (
-            <>
-              {' '}
-              {conversations?.map((user: any) => (
-                <ChatUser key={user?._id} user={user} />
-              ))}
-            </>
+            <h1>Start conversations now</h1>
           )}
-        </div>
-      </aside>
-      <section
-        className={styles.chatArea}
-        style={{ display: Chat?.isOpen ? 'flex' : 'none' }}
-      >
-        {Chat?.isOpen ? <MessageContainer /> : <h1>Start conversations now</h1>}
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 };
 
